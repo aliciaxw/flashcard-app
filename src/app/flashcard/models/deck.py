@@ -10,5 +10,4 @@ class Deck(Base):
     """
     Constructor
     """
-    self.name = kwargs.get('front')
-    
+    self.name = kwargs.get('name')

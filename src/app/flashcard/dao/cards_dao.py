@@ -1,14 +1,16 @@
 from app.constants import *
 from . import *
 
-"""
-Add more methods below!!!
-"""
+def get_card_by_id(card_id):
+  return Card.query.filter_by(Card.id=card_id).first()
 
-def card_by_id(card_id):
-  """
-  Get board by ID
-  """
-  return Card.query.filter_by(id=board_id).first()
+def get_card_by_front(front):
+  return Card.query.filter_by(Card.front=front).first()
 
-def card_by_front()
+def get_all_cards():
+  return Card.query.all()
+
+def create_card(front, back=''):
+  card = Card(front=front,back=back)
+  db_utils.commit_model(card)
+  return card

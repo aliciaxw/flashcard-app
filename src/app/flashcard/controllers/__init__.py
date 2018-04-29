@@ -3,13 +3,14 @@ from functools import wraps # for decorators
 import app
 
 # Models
-from app.kanban.models.all import *
+from app.flashcard.models.all import *
 
 # DAO
-from app.kanban.dao import boards_dao
+from app.flashcard.dao import cards_dao, decks_dao
 
 # Serializers
-board_schema         = BoardSchema()
+card_schema = CardSchema()
+deck_schema = DeckSchema()
 
 # Blueprint
-from app.kanban import kanban
+# from app.flashcard import flashcard

@@ -1,8 +1,9 @@
 from flask import Blueprint
 from app import *
 
-# Kanban Blueprint
-kanban = Blueprint('kanban', __name__, url_prefix='/kanban')
+# Flashcard Blueprint
+# flashcard = Blueprint('flashcard', __name__, url_prefix='/flashcard')
 
 # Import all endpoints
-from controllers.boards_controller import *
+from controllers.get_all_cards import *
+from controllers.get_all_decks import *

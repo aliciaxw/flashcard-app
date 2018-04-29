@@ -11,7 +11,10 @@ def get_all_cards():
   return Card.query.all()
 
 def create_card(front, back, deck_id):
-  # TODO: cards in the same deck should not have same frront
-  card = Card(front=front, back=back, deck_id=deck_id)
-  db_utils.commit_model(card)
-  return card
+  card = Card(front=front,back=back,deck_id=deck_id)
+
+  # do not allow cards with same front in the same deck
+  same_front = Card.query.filter(Card.front==front, Card.deck_id==deck_id).first()
+  if same_front is None:
+    db_utils.commit_model(card)
+    return card

@@ -1,2 +1,2 @@
 # flashcard-app
-for AppDev Backend Course
+backend for a flashcard iOS app for CS 1998

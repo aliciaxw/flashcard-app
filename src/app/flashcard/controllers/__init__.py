@@ -11,6 +11,7 @@ from app.flashcard.dao import cards_dao, decks_dao
 # Serializers
 card_schema = CardSchema()
 deck_schema = DeckSchema()
+decks_schema = DeckSchema(many=True)
 
 # Blueprint
-# from app.flashcard import flashcard
+from app.flashcard import flashcard

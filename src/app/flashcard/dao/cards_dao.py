@@ -10,11 +10,30 @@ def get_card_by_front(front):
 def get_all_cards():
   return Card.query.all()
 
-def create_card(front, back, deck_id):
-  card = Card(front=front,back=back,deck_id=deck_id)
+def create_card(front, back, card_id):
+  card = Card(front=front, back=back, card_id=card_id)
+  db.session.add(card)
 
-  # do not allow cards with same front in the same deck
-  same_front = Card.query.filter(Card.front==front, Card.deck_id==deck_id).first()
-  if same_front is None:
-    db_utils.commit_model(card)
-    return card
+  try:
+    db.session.commit()
+    return card 
+  except Exception as e:
+    db.session.rollback()
+    return e
+
+def delete_card_by_id(card_id):
+  try:
+    card = get_card_by_id(card_id)
+    db.session.delete(card)
+  except Exception:
+    raise Exception('Something went wrong: Deletion')
+  
+  try:
+    db.session.commit()
+    return jsonify({"success": True})
+  except Exception:
+    db.session.rollback()
+    raise Exception('Something went wrong: Commit to session')
+
+def update_card(card_id):
+  # TODO 

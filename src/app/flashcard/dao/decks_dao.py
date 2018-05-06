@@ -7,18 +7,35 @@ def get_deck_by_id(deck_id):
 def get_deck_by_name(name):
   return Deck.query.filter(Deck.name==name).first()
 
-# def get_decks_by_names(names):
-#   return 
-
 def get_all_decks():
   return Deck.query.all()
 
 def create_deck(name):
-  optional_deck = get_deck_by_name(name)
-  if (optional_deck is not None):
-    return False, optional_deck
-
-  # user does not exist
+  if get_deck_by_name(name) != {}: # ?? 
+    raise Exception('Deck with that name already exists')
   deck = Deck(name=name)
-  db_utils.commit_model(deck)
-  return deck
+  db.session.add(deck)
+
+  try:
+    db.session.commit()
+    return deck 
+  except Exception as e:
+    db.session.rollback()
+    return e
+
+def delete_deck(deck_id): 
+  try:
+    deck = get_deck_by_id(deck_id)
+    db.session.delete(deck)
+  except Exception:
+    raise Exception('Something went wrong: Deletion')
+    
+  try:
+    db.session.commit()
+    return jsonify({"success":True})
+  except Exception:
+    db.session.rollback()
+    raise Exception('Something went wrong: Commit to session')
+
+def update_deck(deck_id):
+  # TODO

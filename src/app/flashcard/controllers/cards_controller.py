@@ -5,28 +5,25 @@ from . import *
 # def cards_crud():
 #   return jsonify("Hello World!")
 
-# class GetAllCardsController(AppDevController):
-# class GetAllCardsController(object):
-#   def get_path(self):
-#     return '/cards/'
-
-#   def get_methods(self):
-#     return ['GET']
-
-#   def content(self, **kwargs):
-#     cards = cards_dao.get_all_cards()
-#     serialized_cards = [card_schema.dump(cd).data for cd in cards]
-#     return serialized_cards
-
 @flashcard.route('/cards', methods = ['POST'])
 def create_card():
-  # TODO
+  front = request.args.get('front')
+  back = request.args.get('back')
+  deck_id = request.args.get('deck_id')
+  card = cards_dao.create_card(
+           front=front,
+           back=back,
+           deck_id=deck_id)
+  op = card_schema.dump(card).data
+  return jsonify({'card': op})
 
 @flashcard.route('/cards', methods = ['DELETE'])
 def delete_card():
-  # TODO
+  card_id = request.args.get('card_id')
+  return cards_dao.delete_card_by_id(card_id)
 
 @flashcard.route('/cards', methods = ['PATCH'])
 def update_card():
   # update front, back, or what deck it's in 
   # TODO
+  pass

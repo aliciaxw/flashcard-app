@@ -2,10 +2,10 @@ import os
 
 # Database info
 DB_USERNAME  = os.environ['DB_USERNAME']
-DB_PASSWORD  = os.environ['DB_PASSWORD']
+# DB_PASSWORD  = os.environ['DB_PASSWORD']
 DB_HOST      = os.environ['DB_HOST']
 DB_NAME      = os.environ['DB_NAME']
-DB_URL       = 'mysql://{}:{}@{}/{}'.format(DB_USERNAME, DB_PASSWORD, DB_HOST, DB_NAME)
+DB_URL       = 'postgresql://{}/{}'.format(DB_HOST, DB_NAME)
 
 # Ensure Python path
 basedir = os.path.abspath(os.path.dirname(__file__))

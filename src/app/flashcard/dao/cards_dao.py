@@ -4,11 +4,12 @@ from . import *
 def get_card_by_id(card_id):
   return Card.query.filter(Card.id==card_id).first()
 
-def get_card_by_front(front):
-  return Card.query.filter(Card.front==front).first()
+# def get_card_by_front(front):
+#   return Card.query.filter(Card.front==front).first()
 
-def get_all_cards():
-  return Card.query.all()
+# ???
+# def get_all_cards():
+#   return Card.query.all()
 
 def create_card(front, back, card_id):
   card = Card(front=front, back=back, card_id=card_id)
@@ -36,4 +37,4 @@ def delete_card_by_id(card_id):
     raise Exception('Something went wrong: Commit to session')
 
 def update_card(card_id):
-  # TODO 
+  pass

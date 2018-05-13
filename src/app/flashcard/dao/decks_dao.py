@@ -1,6 +1,8 @@
 from app.constants import *
 from . import *
 
+from flask import jsonify
+
 def get_deck_by_id(deck_id):
   return Deck.query.filter(Deck.id==deck_id).first()
 
@@ -23,7 +25,7 @@ def create_deck(name):
     db.session.rollback()
     return e
 
-def delete_deck(deck_id): 
+def delete_deck_by_id(deck_id): 
   try:
     deck = get_deck_by_id(deck_id)
     db.session.delete(deck)
@@ -39,3 +41,4 @@ def delete_deck(deck_id):
 
 def update_deck(deck_id):
   # TODO
+  pass
